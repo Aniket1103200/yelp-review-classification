@@ -1,47 +1,32 @@
-# yelp-review-classification
-A project focusing on text classification using Natural Language Processing (NLP) techniques. The goal is to classify Yelp reviews into 1-star or 5-star categories based on review content. The project implements data preprocessing, feature engineering, and machine learning pipeline methods for efficient and accurate classification.
+# Yelp Review Classification (NLP)
 
-# Yelp Review Classification
+Classifies Yelp reviews as **1-star or 5-star** based only on the review text.
 
-Welcome to the **Yelp Review Classification Project**! 🚀
+> 📚 **Course project:** completed while following the Udemy course *Python for Data Science and Machine Learning Bootcamp* (Pierian Data). The dataset and task come from the course.
 
-## Overview
-This project is designed to classify Yelp reviews into **1-star** or **5-star** categories based on the textual content of the reviews. Using the **Yelp Review Data Set** from Kaggle, we explore the power of NLP and machine learning to solve this classification problem.
+## Approach
+1. Exploratory analysis of review length and star ratings (Seaborn, Matplotlib)
+2. Filtered the data to 1-star and 5-star reviews
+3. Converted text to features with **CountVectorizer** (bag of words)
+4. Trained a **Multinomial Naive Bayes** classifier
+5. Compared it with a **TF-IDF + Naive Bayes** `Pipeline`
 
-## Problem Statement
-Each observation in the dataset represents a review of a business. Our goal is to classify these reviews into binary categories (1-star or 5-star) using their textual content. This involves:
-- Text preprocessing and tokenization.
-- Feature extraction using vectorization techniques.
-- Implementing a classification pipeline.
+## Results (test set: 1,226 reviews)
 
-## Features Used
-- **Text Content:** The main review content.
-- **Stars:** Target column representing the rating (1 or 5 stars).
+| Model | Accuracy | Macro F1 |
+|---|---|---|
+| CountVectorizer + Multinomial Naive Bayes | **0.93** | 0.87 |
+| TF-IDF + Multinomial Naive Bayes (Pipeline) | 0.81 | 0.45 |
 
-## Methodology
-1. **Data Cleaning & Preprocessing:**
-   - Handled missing values and irrelevant data.
-   - Processed text data (removing stopwords, lowercasing, etc.).
+**Takeaway:** adding TF-IDF made the model worse here. It predicted almost only the majority class (5 stars). The simpler bag-of-words model worked best.
 
-2. **Feature Engineering:**
-   - Implemented `CountVectorizer` and `TF-IDF` for text vectorization.
+## Tech
+Python · pandas · NumPy · scikit-learn · Matplotlib · Seaborn · Jupyter
 
-3. **Pipeline Creation:**
-   - Combined vectorization with a classification model (`Naive Bayes`).
-
-4. **Evaluation Metrics:**
-   - Accuracy
-   - Precision
-   - Recall
-
-5. **Insights:**
-   - Explored the relationship between review content and star ratings.
-   - Visualized word usage frequency and sparsity.
-
-## Results
-Achieved high classification accuracy using a combination of `TF-IDF` and `Multinomial Naive Bayes`. Detailed evaluation metrics and plots are provided in the Jupyter Notebook.
-
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Aniket1103200/yelp-review-classification.git
+## Run it
+```bash
+git clone https://github.com/Aniket1103200/yelp-review-classification.git
+cd yelp-review-classification
+pip install -r requirements.txt
+jupyter notebook yelp_review_classification.ipynb
+```
